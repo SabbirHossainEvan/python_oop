@@ -29,7 +29,7 @@ def run_menu():
             student_id = input("Enter the student ID to enroll: ").strip()
             try:
                 student = enroll_student(student_id, StudentDatabase.student_list)
-                print(f"{student.name} is now enrolled.")
+                print(f"{student.get_name()} is now enrolled.")
             except (StudentNotFoundError, ValueError) as error:
                 print(error)
 
@@ -37,7 +37,7 @@ def run_menu():
             student_id = input("Enter the student ID to drop: ").strip()
             try:
                 student = drop_student(student_id, StudentDatabase.student_list)
-                print(f"{student.name} is no longer enrolled.")
+                print(f"{student.get_name()} is no longer enrolled.")
             except (StudentNotFoundError, ValueError) as error:
                 print(error)
 

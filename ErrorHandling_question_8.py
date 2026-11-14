@@ -4,7 +4,7 @@ class StudentNotFoundError(Exception):
 
 def find_student(student_id, student_list):
     for student in student_list:
-        if str(student.student_id) == str(student_id):
+        if str(student.get_student_id()) == str(student_id):
             return student
     raise StudentNotFoundError(f"No student found with ID '{student_id}'.")
 
