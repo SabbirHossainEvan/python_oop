@@ -6,13 +6,16 @@ class Student:
         self.department = department
         self.is_enrolled = is_enrolled
 
-#this code is for question 7
+#this code belongs to question 7 and 8
 
     def enroll_student(self):
-        if not self.is_enrolled:
-            self.is_enrolled = True
+        if self.is_enrolled:
+            raise ValueError("This student is already enrolled.")
+        self.is_enrolled = True
 
     def drop_student(self):
+        if not self.is_enrolled:
+            raise ValueError("This student is not enrolled.")
         self.is_enrolled = False
 
     def view_student_info(self):

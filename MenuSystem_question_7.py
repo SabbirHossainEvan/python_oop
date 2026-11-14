@@ -1,12 +1,10 @@
 from InitializeStudentObject_question_3 import student
 from StudentDatabase_question_1 import StudentDatabase
-
-
-def find_student(student_id):
-    for student in StudentDatabase.student_list:
-        if str(student.student_id) == student_id:
-            return student
-    return None
+from ErrorHandling_question_8 import (
+    StudentNotFoundError,
+    enroll_student,
+    drop_student,
+)
 
 
 def run_menu():
@@ -29,21 +27,19 @@ def run_menu():
 
         elif choice == "2":
             student_id = input("Enter the student ID to enroll: ").strip()
-            student = find_student(student_id)
-            if student is None:
-                print("Student not found.")
-            else:
-                student.enroll_student()
+            try:
+                student = enroll_student(student_id, StudentDatabase.student_list)
                 print(f"{student.name} is now enrolled.")
+            except (StudentNotFoundError, ValueError) as error:
+                print(error)
 
         elif choice == "3":
             student_id = input("Enter the student ID to drop: ").strip()
-            student = find_student(student_id)
-            if student is None:
-                print("Student not found.")
-            else:
-                student.drop_student()
+            try:
+                student = drop_student(student_id, StudentDatabase.student_list)
                 print(f"{student.name} is no longer enrolled.")
+            except (StudentNotFoundError, ValueError) as error:
+                print(error)
 
         elif choice == "4":
             print("Exiting the student database.")
